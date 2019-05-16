@@ -1,0 +1,206 @@
+/* ========== CSS 全區設定 ========== */
+/*公版內容開始，排版用class，標註特定位置用id*/
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+
+* {
+  /*border-box：實際寬高＝所設定的數值(已包含border和padding)*/
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom:10px;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+a, a:hover, a:focus {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+}
+
+img {
+  height: auto;
+  display: block;
+}
+
+.container:first-child{
+  padding-top: 0px;
+}
+
+.container{
+  max-width:1170px;
+  margin:0px;
+  padding: 5px 0px;
+}
+
+/*清除浮動效果，讓高度出現，方法II*/
+.clearfix:after{
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+/*---------------Navigation---------------*/
+nav{
+  max-width: 600px;
+}
+
+nav ul li{
+  margin:10px 0px 3px 10px;
+  float:left;
+}
+
+nav ul li span{
+  font-size:20px;
+  padding-right:7px;
+}
+
+nav ul li span:first-child{
+  margin-right:4px;
+}
+
+nav ul li:last-child{
+  display:none;
+}
+
+/*----------------SEARCH----------------*/
+.search{
+  text-align:center;
+  max-width:600px;
+}
+
+.search form{
+  float:left;
+  margin:10px 0px 0px 4px;
+}
+
+.search form input{
+  margin-top:10px;
+  width:100px;
+  border: 2px solid black; 
+}
+
+.search button{
+  margin-top:12px; 
+}
+
+/*----------------------Data Panel Settings-----------------*/
+.custom-table-width{
+  overflow-x:auto;
+}
+
+.description {
+  max-width: 600px;
+}
+
+.description p{
+  text-align: center;
+}
+
+.time{
+  max-width: 600px;
+  text-align: center;
+  font-size:16px;
+}
+
+#rateTable{
+  table-layout: fixed;
+  min-width:320px;
+  max-width:600px;
+}
+
+#rateTable p{
+  margin-top: 5px;
+  text-align: left;
+}
+
+#rateTable h3{
+  margin-top:10px;
+  font-size:12px;
+  max-width:160px;
+}
+
+#rateTable tbody tr:hover{
+  background-color:#adadad;
+}
+
+#rateTable thead th:first-child,
+#rateTable tbody td:first-child {
+  width:2em;
+}
+
+#rateTable thead th:nth-child(2),
+#rateTable tbody td:nth-child(2),
+#rateTable thead th:nth-child(3),
+#rateTable tbody td:nth-child(3){
+  width:1.5em;
+}
+
+
+
+
+/*-----RWD SETTING-------*/
+@media screen and (min-width:536px){
+  .search button
+  {
+    float:right;
+    margin-top:10px; 
+  }
+
+  nav ul li{
+    margin:10px 0px 3px 4px;
+    float:left;
+  }
+
+  nav ul li span{
+    font-size:20px;
+    padding-right:7px;
+  }
+
+  #rateTable h3{
+    font-size:16px;
+  }
+
+  #rateTable p{
+    font-size:16px;
+  }
+}
+
+@media screen and (min-width:600px){
+  nav ul li:last-child{
+    display:inline;
+  }
+
+  #rateTable h3{
+    font-size:18px;
+  }
+
+  #rateTable p{
+    font-size:20px;
+  }
+
+}
+
+

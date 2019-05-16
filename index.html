@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Exchange Rate</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <ul>
+        <li><span class="flag-icon flag-icon-tw flag-icon-squared"></span><a href="#" id='twd'><span>新台幣</span></a>
+        </li>
+        <li><span class="flag-icon flag-icon-us flag-icon-squared"></span><a href="#" id='usd'><span>美元</span></a>
+        </li>
+        <li><span class="flag-icon flag-icon-eu flag-icon-squared"></span><a href="#" id='eur'><span>歐元</span></a>
+        </li>
+        <li><span class="flag-icon flag-icon-gb flag-icon-squared"></span><a href="#" id='gbp'><span>英鎊</span></a>
+        </li>
+        <li><span class="flag-icon flag-icon-ch flag-icon-squared"></span><a href="#" id='chf'><span>瑞郎</span></a>
+        </li>
+        <li><span class="flag-icon flag-icon-jp flag-icon-squared"></span><a href="#" id='jpy'><span>日圓</span></a>
+        </li>
+        <li><span class="flag-icon flag-icon-cn flag-icon-squared"></span><a href="#" id='cny'><span>人民幣</span></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </nav>
+    <div class="search">
+      <form action="#" method="get">
+        <p>請輸入基準貨幣三位英文代碼(如：TWD)：<input type="text" id="search"></p>
+      </form>
+      <button class="btn btn-primary" type="submit" id="submit-search">Search</button>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <!-- Data Panel-->
+  <div class="container">
+    <div class="dataPanel">
+      <!-- Data will show here.-->
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
