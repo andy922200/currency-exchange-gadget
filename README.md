@@ -25,9 +25,9 @@
 * 'USD': '美元'
 
 ### How to use?
-1.載入時，預設為新台幣(TWD)
-2.上方有常用到的基準貨幣，你可以點選來切換
-3.你也可以在中間方框輸入代碼，然後按下 enter 或是 右邊的 'search'
+1. 載入時，預設為新台幣(TWD)
+2. 上方有常用到的基準貨幣，你可以點選來切換
+3. 你也可以在中間方框輸入代碼，然後按下 enter 或是 右邊的 'search'
 
 ### One more thing...
 In the further versions, the gadget will try to add the calculator something interesting. Please look forward :)
