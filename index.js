@@ -1,6 +1,6 @@
 (function () {
   const BASE_URL = 'https://api.exchangerate-api.com/v4/latest/'
-  const LOC_URL = 'http://www.geoplugin.net/json.gp?jsoncallback'
+  const LOC_URL = 'https://ssl.geoplugin.net/json.gp?k=7b14a388b4ddd6e3'
   const CURRENCY = ['TWD', 'USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CNY', 'AUD', 'CAD', 'CZK', 'HKD', 'HUF', 'ISK', 'KRW', 'MYR', 'NZD', 'PLN', 'SGD', 'THB', 'TRY']
   const userIP = document.querySelector('.userIP')
   const IPCountry = document.querySelector('.IPCountry')
