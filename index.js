@@ -29,14 +29,14 @@
         const yourCountry = location.data.geoplugin_countryName
         if (CURRENCY.includes(defaultCurrency)) {
           typeChoice = defaultCurrency
-          asyncDefaultDisplay(data, typeChoice, yourCountry, IP)
+          asyncDefaultDisplay(data, typeChoice, yourCountry, IP, defaultCurrency)
         } else {
           asyncDefaultDisplay(data, "USD", yourCountry, IP)
         }
       })
       .catch((error) => console.log(error))
     //顯示對應貨幣
-    let asyncDefaultDisplay = async (data, typeChoice, yourCountry, IP) => {
+    let asyncDefaultDisplay = async (data, typeChoice, yourCountry, IP, defaultCurrency) => {
       await axios
         .get(BASE_URL + typeChoice)
         .then(response => {
@@ -45,7 +45,7 @@
           data = Object.entries(response.data.rates)
           //console.log(data[0][0])
           //console.log(data[0][1])
-          displayIP(yourCountry, IP)
+          displayIP(yourCountry, IP, defaultCurrency)
           process(data, timeData)
         })
         .catch((error) => console.log(error))
@@ -111,17 +111,23 @@
     timeData[2][2] = formattedTime
   }
 
-  //顯示IP Address
-  function displayIP(yourCountry, IP) {
+  //顯示IP Address & CURRENCY CODE
+  function displayIP(yourCountry, IP, defaultCurrency) {
     let IPHtmlContent = ''
     let countryHtmlContent = ''
     IPHtmlContent = `
       <span>您的IP位置是 ${IP}</span>
     `
     userIP.innerHTML = IPHtmlContent
-    countryHtmlContent = `
-      <span>您的所在位置是 ${yourCountry}</span>
+    if (defaultCurrency !== null) {
+      countryHtmlContent = `
+      <span>您的所在位置是 ${yourCountry}</span><span>；貨幣預設代碼為：${defaultCurrency}</span>
     `
+    } else {
+      countryHtmlContent = `
+      <span>您的所在位置是 ${yourCountry}</span><span>；貨幣預設代碼為：USD</span>
+    `
+    }
     IPCountry.innerHTML = countryHtmlContent
   }
 
