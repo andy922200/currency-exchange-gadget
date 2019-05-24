@@ -104,7 +104,7 @@
     // Seconds part from the timestamp
     let seconds = "0" + date.getSeconds();
 
-    (hours < 12) ? (hours = '上午 ' + hours + ' ') : (hours = '下午 ' + hours + ' ')
+    //(hours < 12) ? (hours = '上午 ' + hours + ' ') : (hours = '下午 ' + hours + ' ')
 
     // Will display time in format
     let formattedTime = year + "年" + month + '月' + day + '日 星期' + weekday + '  ' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2) + ' 更新'
