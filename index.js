@@ -121,11 +121,13 @@
     userIP.innerHTML = IPHtmlContent
     if (defaultCurrency !== null) {
       countryHtmlContent = `
-      <span>您的所在位置是 ${yourCountry}</span><span>；貨幣預設代碼為：${defaultCurrency}</span>
+      <span>您的所在位置是：${yourCountry}</span>
+      <p>貨幣預設代碼為：${defaultCurrency}</p>
     `
     } else {
       countryHtmlContent = `
-      <span>您的所在位置是 ${yourCountry}</span><span>；貨幣預設代碼為：USD</span>
+      <span>您的所在位置是： ${yourCountry}</span>
+      <p>貨幣預設代碼為：USD</p>
     `
     }
     IPCountry.innerHTML = countryHtmlContent

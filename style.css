@@ -111,6 +111,10 @@ nav ul li:last-child{
   overflow-x:auto;
 }
 
+.defaultCurrency{
+  display:none;
+}
+
 .description, .defaultCurrency {
   max-width: 600px;
 }
@@ -124,11 +128,12 @@ nav ul li:last-child{
 }
 
 .userIP{
-  float:left;
+  display:none;
 }
 
 .IPCountry{
-  float:right;
+  margin-top:5px;
+  text-align: center;
 }
 
 .time{
@@ -186,6 +191,17 @@ nav ul li:last-child{
   nav ul li span{
     font-size:20px;
     padding-right:7px;
+  }
+
+  .userIP{
+  display:inline;
+  float:left;
+  }
+
+  .IPCountry{
+  float:right;
+  margin-top:0px;
+  text-align: left;
   }
 
   #rateTable h3{
