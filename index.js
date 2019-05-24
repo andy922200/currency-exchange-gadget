@@ -1,6 +1,9 @@
 (function () {
   const BASE_URL = 'https://api.exchangerate-api.com/v4/latest/'
+  const LOC_URL = 'http://www.geoplugin.net/json.gp?jsoncallback'
   const CURRENCY = ['TWD', 'USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CNY', 'AUD', 'CAD', 'CZK', 'HKD', 'HUF', 'ISK', 'KRW', 'MYR', 'NZD', 'PLN', 'SGD', 'THB', 'TRY']
+  const userIP = document.querySelector('.userIP')
+  const IPCountry = document.querySelector('.IPCountry')
   const dataPanel = document.querySelector('.dataPanel')
   const searchInput = document.getElementById('search')
   const searchButton = document.getElementById('submit-search')
@@ -12,23 +15,41 @@
   const jpy = document.querySelector('#jpy')
   const cny = document.querySelector('#cny')
   let data = []
-  let typeChoice = 'TWD'
 
-  //預設呼叫 TWD
+  //初始呼叫
   setDefault(data)
-  //新台幣預設顯示函數
+  //相關的啟用 function 要放在 axios 裡，以免async特性導致資料抓不到 
   function setDefault(data) {
-    axios //相關的啟用 function 要放在 axios 裡，以免async特性導致資料抓不到  
-      .get(BASE_URL + CURRENCY[0])
-      .then((response) => {
-        timeData = Object.entries(response.data)
-        //console.log(timeData[2][1])
-        data = Object.entries(response.data.rates)
-        //console.log(data[0][0])
-        //console.log(data[0][1])
-        process(data, timeData)
+    //取得IP位置
+    axios
+      .get(LOC_URL)
+      .then(location => {
+        const IP = location.data.geoplugin_request
+        const defaultCurrency = location.data.geoplugin_currencyCode
+        const yourCountry = location.data.geoplugin_countryName
+        if (CURRENCY.includes(defaultCurrency)) {
+          typeChoice = defaultCurrency
+          asyncDefaultDisplay(data, typeChoice, yourCountry, IP)
+        } else {
+          asyncDefaultDisplay(data, "USD", yourCountry, IP)
+        }
       })
       .catch((error) => console.log(error))
+    //顯示對應貨幣
+    let asyncDefaultDisplay = async (data, typeChoice, yourCountry, IP) => {
+      await axios
+        .get(BASE_URL + typeChoice)
+        .then(response => {
+          timeData = Object.entries(response.data)
+          //console.log(timeData)
+          data = Object.entries(response.data.rates)
+          //console.log(data[0][0])
+          //console.log(data[0][1])
+          displayIP(yourCountry, IP)
+          process(data, timeData)
+        })
+        .catch((error) => console.log(error))
+    }
   }
 
   //數據處理流程
@@ -90,10 +111,23 @@
     timeData[2][2] = formattedTime
   }
 
-  //顯示於桌面上
+  //顯示IP Address
+  function displayIP(yourCountry, IP) {
+    let IPHtmlContent = ''
+    let countryHtmlContent = ''
+    IPHtmlContent = `
+      <span>您的IP位置是 ${IP}</span>
+    `
+    userIP.innerHTML = IPHtmlContent
+    countryHtmlContent = `
+      <span>您的所在位置是 ${yourCountry}</span>
+    `
+    IPCountry.innerHTML = countryHtmlContent
+  }
+
+  //顯示數據於桌面上
   function display(data, timeData) {
     const directory = { 'AUD': '澳幣', 'CAD': '加拿大幣', 'CHF': '瑞士法郎', 'CNY': '人民幣', 'CZK': '捷克克朗', 'EUR': '歐元', 'GBP': '英鎊', 'HKD': '港幣', 'HUF': '匈牙利福林', 'ISK': '冰島克朗', 'JPY': '日圓', 'KRW': '韓圜', 'MYR': '馬來西亞令吉', 'NZD': '紐幣', 'PLN': '波蘭盾', 'SGD': '新加坡幣', 'THB': '泰銖', 'TWD': '新台幣', 'TRY': '土耳其里拉', 'USD': '美元' }
-
     //替貨幣代碼加上中文字
     let codesArray = [].concat.apply([], data) // 二維array＝>一維
     for (let i = 3; i < codesArray.length; i += 3) {
@@ -110,6 +144,7 @@
     htmlContent += `
     <div class="time">${timeData[2][2]}</div>
     <div class="description"><p>根據電腦所在地時間轉換</p></div>
+    <div class="defaultCurrency"><p>根據IP位置自動切換預設貨幣。若沒有該貨幣資料，預設為美元。</p></div>
     <div class="custom-table-width">
       <table class="table table-sm" id ='rateTable'>
         <thead class="thead-dark">
@@ -143,7 +178,14 @@
   twd.addEventListener('click', function () {
     typeChoice = 'TWD'
     if (typeChoice === 'TWD') {
-      setDefault(data)
+      axios
+        .get(BASE_URL + CURRENCY[0])
+        .then((response) => {
+          timeData = Object.entries(response.data)
+          data = Object.entries(response.data.rates)
+          process(data, timeData)
+        })
+        .catch((error) => console.log(error))
     }
   })
 

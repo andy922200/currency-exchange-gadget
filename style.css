@@ -111,12 +111,24 @@ nav ul li:last-child{
   overflow-x:auto;
 }
 
-.description {
+.description, .defaultCurrency {
   max-width: 600px;
 }
 
-.description p{
+.description p, .defaultCurrency p{
   text-align: center;
+}
+
+.IP{
+  max-width: 600px;
+}
+
+.userIP{
+  float:left;
+}
+
+.IPCountry{
+  float:right;
 }
 
 .time{
@@ -157,9 +169,6 @@ nav ul li:last-child{
 #rateTable tbody td:nth-child(3){
   width:1.5em;
 }
-
-
-
 
 /*-----RWD SETTING-------*/
 @media screen and (min-width:536px){
