@@ -1,4 +1,4 @@
-# Currency Exchange Table (zh-tw)
+# Currency Exchange Table (zh-tw 繁體中文版)
 繁體中文版的匯率轉換小工具
 
 ## Features 特色
@@ -25,8 +25,9 @@
 * 'USD': '美元'
 
 ### How to use? 如何使用？
-1. 載入時，預設為新台幣(TWD)
-2. 上方有常用到的基準貨幣，你可以點選來切換
+1. 載入時，依照你所在的IP位置，預設為該地貨幣。
+如果沒有該預設貨幣資料，則會以美元(USD)為基準。
+2. 上方有預設的基準貨幣，你可以自由點選來切換
 3. 你也可以在中間方框輸入代碼，然後按下 enter 或是 右邊的 'search'
 
 ### One more thing... 更多
