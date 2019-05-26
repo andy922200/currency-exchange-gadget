@@ -292,6 +292,7 @@
         process(data, timeData)
       })
       .catch((error) => alert('輸入錯誤，請再試一次'))
+    searchInput.value = ''
   })
 
   //ENTER 監聽器
@@ -306,6 +307,7 @@
           process(data, timeData)
         })
         .catch((error) => alert('輸入錯誤，請再試一次'))
+      searchInput.value = ''
     }
   })
 
