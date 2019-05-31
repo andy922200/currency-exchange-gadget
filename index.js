@@ -77,7 +77,7 @@
 
   //刪除某些貨幣(要先知道 index number)
   function filterCurrency(data) {
-    const filterData = ['BGN', 'BRL', 'DKK', 'HRK', 'IDR', 'ILS', 'INR', 'MXN', 'NOK', 'PEN', 'PHP', 'RON', 'RUB', 'SAR', 'SEK', 'ZAR']
+    const filterData = ['AED', 'ARS', 'BGN', 'BSD', 'BRL', 'CLP', 'DKK', 'COP', 'DOP', 'EGP', 'FJD', 'GTQ', 'HRK', 'IDR', 'ILS', 'INR', 'KZT', 'MXN', 'NOK', 'PAB', 'PEN', 'PHP', 'PKR', 'PYG', 'RON', 'RUB', 'SAR', 'SEK', 'UAH', 'UYU', 'VND', 'ZAR']
     for (let i = 0; i < data.length; i++) {
       for (let j = 0; j < filterData.length; j++) {
         if (data[i][0] === filterData[j]) {
