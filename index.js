@@ -77,7 +77,7 @@
 
   //刪除某些貨幣(要先知道 index number)
   function filterCurrency(data) {
-    const filterData = ['AED', 'ARS', 'BGN', 'BSD', 'BRL', 'CLP', 'DKK', 'COP', 'DOP', 'EGP', 'FJD', 'GTQ', 'HRK', 'IDR', 'ILS', 'INR', 'KZT', 'MXN', 'NOK', 'PAB', 'PEN', 'PHP', 'PKR', 'PYG', 'RON', 'RUB', 'SAR', 'SEK', 'UAH', 'UYU', 'VND', 'ZAR']
+    const filterData = ['AED', 'ARS', 'BGN', 'BSD', 'BRL', 'CLP', 'DKK', 'COP', 'DOP', 'EGP', 'FJD', 'GTQ', 'HRK', 'IDR', 'ILS', 'INR', 'KZT', 'MVR', 'MXN', 'NOK', 'PAB', 'PEN', 'PHP', 'PKR', 'PYG', 'RON', 'RUB', 'SAR', 'SEK', 'UAH', 'UYU', 'VND', 'ZAR']
     for (let i = 0; i < data.length; i++) {
       for (let j = 0; j < filterData.length; j++) {
         if (data[i][0] === filterData[j]) {
@@ -137,7 +137,7 @@
     //替貨幣代碼加上中文字
     let codesArray = [].concat.apply([], data) // 二維array＝>一維
     for (let i = 3; i < codesArray.length; i += 3) {
-      //console.log(directory[codesArray[i]])
+      console.log(directory[codesArray[i]])
       for (let j = 1; j < data.length; j++) {
         if (directory[data[j][0]] === directory[codesArray[i]]) {
           data[j][0] = data[j][0] + " " + directory[data[j][0]]
