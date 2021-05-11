@@ -15,6 +15,7 @@
   const jpy = document.querySelector('#jpy')
   const cny = document.querySelector('#cny')
   let data = []
+  let filterCurrencyList = []
 
   //初始呼叫
   setDefault(data)
@@ -41,8 +42,8 @@
         .get(BASE_URL + typeChoice)
         .then(response => {
           timeData = Object.entries(response.data)
-          //console.log(timeData)
           data = Object.entries(response.data.rates)
+          filterCurrencyList = [...CURRENCY, ...Object.keys(response.data.rates)].filter(item => CURRENCY.indexOf(item) === -1)
           //console.log(data[0][0])
           //console.log(data[0][1])
           displayIP(yourCountry, IP, defaultCurrency)
@@ -77,10 +78,9 @@
 
   //刪除某些貨幣(要先知道 index number)
   function filterCurrency(data) {
-    const filterData = ['AED', 'ARS', 'BGN', 'BSD', 'BRL', 'CLP', 'DKK', 'COP', 'DOP', 'EGP', 'FJD', 'GTQ', 'HRK', 'IDR', 'ILS', 'INR', 'KZT', 'MVR', 'MXN', 'NOK', 'PAB', 'PEN', 'PHP', 'PKR', 'PYG', 'RON', 'RUB', 'SAR', 'SEK', 'UAH', 'UYU', 'VND', 'ZAR']
     for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < filterData.length; j++) {
-        if (data[i][0] === filterData[j]) {
+      for (let j = 0; j < filterCurrencyList.length; j++) {
+        if (data[i][0] === filterCurrencyList[j]) {
           data.splice(i, 1) //splice 刪除不連續 array
           i--
         }
@@ -92,7 +92,7 @@
   function unixChange(timeData) {
     // multiplied by 1000 so that the argument is in milliseconds, not seconds.
     const day_list = ['日', '一', '二', '三', '四', '五', '六']
-    let date = new Date(timeData[2][1] * 1000);
+    let date = new Date(Math.floor(new Date().getTime() / 1000) * 1000);
     let year = date.getFullYear()
     let month = date.getMonth() + 1
     let day = date.getDate();
