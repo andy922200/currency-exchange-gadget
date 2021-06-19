@@ -1,6 +1,5 @@
 (function () {
   const BASE_URL = 'https://api.exchangerate-api.com/v4/latest/'
-  const LOC_URL = 'https://api.allorigins.win/get?url=https://ssl.geoplugin.net/json.gp?k=7b14a388b4ddd6e3'
   const CURRENCY = ['TWD', 'USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CNY', 'AUD', 'CAD', 'CZK', 'HKD', 'HUF', 'ISK', 'KRW', 'MYR', 'NZD', 'PLN', 'SGD', 'THB', 'TRY']
   const userIP = document.querySelector('.userIP')
   const IPCountry = document.querySelector('.IPCountry')
@@ -21,21 +20,6 @@
   setDefault(data)
   //相關的啟用 function 要放在 axios 裡，以免async特性導致資料抓不到 
   function setDefault(data) {
-    //取得IP位置
-    axios
-      .get(LOC_URL)
-      .then(location => {
-        const IP = location.data.geoplugin_request
-        const defaultCurrency = location.data.geoplugin_currencyCode
-        const yourCountry = location.data.geoplugin_countryName
-        if (CURRENCY.includes(defaultCurrency)) {
-          typeChoice = defaultCurrency
-          asyncDefaultDisplay(data, typeChoice, yourCountry, IP, defaultCurrency)
-        } else {
-          asyncDefaultDisplay(data, "USD", yourCountry, IP)
-        }
-      })
-      .catch((error) => console.log(error))
     //顯示對應貨幣
     let asyncDefaultDisplay = async (data, typeChoice, yourCountry, IP, defaultCurrency) => {
       await axios
@@ -51,6 +35,7 @@
         })
         .catch((error) => console.log(error))
     }
+    asyncDefaultDisplay(data, "USD", "", "","")
   }
 
   //數據處理流程
