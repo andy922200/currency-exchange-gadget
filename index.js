@@ -1,6 +1,6 @@
 (function () {
   const BASE_URL = 'https://api.exchangerate-api.com/v4/latest/'
-  const LOC_URL = 'https://ssl.geoplugin.net/json.gp?k=7b14a388b4ddd6e3'
+  const LOC_URL = 'https://api.allorigins.win/get?url=https://ssl.geoplugin.net/json.gp?k=7b14a388b4ddd6e3'
   const CURRENCY = ['TWD', 'USD', 'EUR', 'GBP', 'CHF', 'JPY', 'CNY', 'AUD', 'CAD', 'CZK', 'HKD', 'HUF', 'ISK', 'KRW', 'MYR', 'NZD', 'PLN', 'SGD', 'THB', 'TRY']
   const userIP = document.querySelector('.userIP')
   const IPCountry = document.querySelector('.IPCountry')
@@ -181,118 +181,47 @@
   }
 
   //TWD,USD,EUR,GBP,CHF,JPY,CNY貨幣監聽器
-  twd.addEventListener('click', function () {
-    typeChoice = 'TWD'
-    if (typeChoice === 'TWD') {
-      axios
-        .get(BASE_URL + CURRENCY[0])
-        .then((response) => {
-          timeData = Object.entries(response.data)
-          data = Object.entries(response.data.rates)
-          process(data, timeData)
-        })
-        .catch((error) => console.log(error))
+  function baseCurrencyCallbackGenerator(curName){
+    return function () {
+      typeChoice = curName
+      if (typeChoice === curName) {
+        axios
+          .get(BASE_URL + curName)
+          .then((response) => {
+            timeData = Object.entries(response.data)
+            data = Object.entries(response.data.rates)
+            process(data, timeData)
+          })
+          .catch((error) => console.log(error))
+      }
     }
-  })
+  }
 
-  usd.addEventListener('click', function () {
-    typeChoice = 'USD'
-    if (typeChoice === 'USD') {
-      axios
-        .get(BASE_URL + CURRENCY[1])
-        .then((response) => {
-          timeData = Object.entries(response.data)
-          data = Object.entries(response.data.rates)
-          process(data, timeData)
-        })
-        .catch((error) => console.log(error))
-    }
-  })
-
-  eur.addEventListener('click', function () {
-    typeChoice = 'EUR'
-    if (typeChoice === 'EUR') {
-      axios
-        .get(BASE_URL + CURRENCY[2])
-        .then((response) => {
-          timeData = Object.entries(response.data)
-          data = Object.entries(response.data.rates)
-          process(data, timeData)
-        })
-        .catch((error) => console.log(error))
-    }
-  })
-
-  gbp.addEventListener('click', function () {
-    typeChoice = 'GBP'
-    if (typeChoice === 'GBP') {
-      axios
-        .get(BASE_URL + CURRENCY[3])
-        .then((response) => {
-          timeData = Object.entries(response.data)
-          data = Object.entries(response.data.rates)
-          process(data, timeData)
-        })
-        .catch((error) => console.log(error))
-    }
-  })
-
-  chf.addEventListener('click', function () {
-    typeChoice = 'CHF'
-    if (typeChoice === 'CHF') {
-      axios
-        .get(BASE_URL + CURRENCY[4])
-        .then((response) => {
-          timeData = Object.entries(response.data)
-          data = Object.entries(response.data.rates)
-          process(data, timeData)
-        })
-        .catch((error) => console.log(error))
-    }
-  })
-
-  jpy.addEventListener('click', function () {
-    typeChoice = 'JPY'
-    if (typeChoice === 'JPY') {
-      axios
-        .get(BASE_URL + CURRENCY[5])
-        .then((response) => {
-          timeData = Object.entries(response.data)
-          data = Object.entries(response.data.rates)
-          process(data, timeData)
-        })
-        .catch((error) => console.log(error))
-    }
-  })
-
-  cny.addEventListener('click', function () {
-    typeChoice = 'CNY'
-    if (typeChoice === 'CNY') {
-      axios
-        .get(BASE_URL + CURRENCY[6])
-        .then((response) => {
-          timeData = Object.entries(response.data)
-          data = Object.entries(response.data.rates)
-          process(data, timeData)
-        })
-        .catch((error) => console.log(error))
-    }
-  })
+  twd.addEventListener('click', baseCurrencyCallbackGenerator('TWD'))
+  usd.addEventListener('click', baseCurrencyCallbackGenerator('USD'))
+  eur.addEventListener('click', baseCurrencyCallbackGenerator('EUR'))
+  gbp.addEventListener('click', baseCurrencyCallbackGenerator('GBP'))
+  chf.addEventListener('click', baseCurrencyCallbackGenerator('CHF'))
+  jpy.addEventListener('click', baseCurrencyCallbackGenerator('JPY'))
+  cny.addEventListener('click', baseCurrencyCallbackGenerator('CNY'))
 
   //search 監聽器
   searchButton.addEventListener('click', event => {
     //event.preventDefault()
-    let code = searchInput.value
-    //console.log('click')
-    axios
-      .get(BASE_URL + code)
-      .then((response) => {
-        timeData = Object.entries(response.data)
-        data = Object.entries(response.data.rates)
-        process(data, timeData)
-      })
-      .catch((error) => alert('輸入錯誤，請再試一次'))
-    searchInput.value = ''
+    let code = searchInput.value.trim()
+    if (CURRENCY.join(" ").search(new RegExp(`\\b${code}\\b`))){
+      axios
+        .get(BASE_URL + code)
+        .then((response) => {
+          timeData = Object.entries(response.data)
+          data = Object.entries(response.data.rates)
+          process(data, timeData)
+        })
+        .catch((error) => alert('輸入錯誤，請再試一次'))
+      searchInput.value = ''
+    }else{
+      alert('請輸入下方表格中所有的基準貨幣代碼')
+    }
   })
 
   //ENTER 監聽器
